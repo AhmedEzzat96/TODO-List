@@ -14,9 +14,15 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
-        textFieldDelegate()
         ref = Database.database().reference()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+        userNameTextField.text = ""
+        passwordTextField.text = ""
+        emailTextField.text = ""
+        textFieldDelegate()
     }
     
     private func createUser(email: String, password: String, completionBlock: @escaping (_ success: Bool) -> Void) {
@@ -75,11 +81,16 @@ class SignUpVC: UIViewController {
         self.navigationController?.pushViewController(signInVC, animated: true)
     }
     
+    private func goToTODOListVc(){
+        let todoListVC = UIStoryboard.init(name: Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: VCs.toDoListVC) as! ToDoListVC
+        self.navigationController?.pushViewController(todoListVC, animated: true)
+    }
+    
     @IBAction func signUpBtnPressed(_ sender: UIButton) {
         if isValidData() {
             createUser(email: emailTextField.text!, password: passwordTextField.text!) { (bool) in
                 if bool == true {
-                    self.goToSignInVc()
+                    self.goToTODOListVc()
                 }
             }
         }

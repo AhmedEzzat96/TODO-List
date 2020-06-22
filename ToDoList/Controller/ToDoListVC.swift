@@ -19,9 +19,6 @@ class ToDoListVC: UIViewController {
         getUserData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
     @IBAction func backBtnPressed(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }

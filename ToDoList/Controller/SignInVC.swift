@@ -13,12 +13,14 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textFieldDelegate()
         ref = Database.database().reference()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        passwordTextField.text = ""
+        emailTextField.text = ""
+        textFieldDelegate()
     }
     
     private func login(completionBlock: @escaping (_ success: Bool) -> Void) {
